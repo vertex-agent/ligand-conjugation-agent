@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import streamlit as st
 
 from src.app_logic import load_dataframe_from_upload, run_agent
 
 
 st.set_page_config(page_title="VERTEX", layout="wide")
+
+DEFAULT_KB_PATH = Path("/Users/wonlee/Desktop/Knowledge Base - Protocol Database.csv")
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []  # list[dict[str, str]] with keys: role, content
@@ -205,8 +209,11 @@ with st.sidebar:
     else:
         st.info("No messages yet.")
 
-upload = None
-article = None
+    st.divider()
+    st.subheader("Knowledge base")
+    st.caption("Locked source (CSV-only)")
+    st.code(str(DEFAULT_KB_PATH))
+    st.info("All answers are generated only from this CSV knowledge base.")
 
 query_col, button_col = st.columns([0.92, 0.08], vertical_alignment="bottom")
 with query_col:
@@ -224,20 +231,28 @@ with button_col:
 if run:
     if query.strip():
         st.session_state.chat_history.append({"role": "user", "content": query.strip()})
-    if not upload:
-        msg = "No knowledge base is connected (Input Data section removed)."
-        st.error(msg)
-        st.session_state.chat_history.append({"role": "assistant", "content": msg})
-    elif not query.strip():
+    if not query.strip():
         st.error("Enter a research question.")
     else:
         try:
-            df = load_dataframe_from_upload(upload.name, upload.getvalue())
+            if not DEFAULT_KB_PATH.exists():
+                msg = f"Knowledge base CSV not found: {DEFAULT_KB_PATH}"
+                st.error(msg)
+                st.session_state.chat_history.append({"role": "assistant", "content": msg})
+                st.stop()
+
+            df = load_dataframe_from_upload(DEFAULT_KB_PATH.name, DEFAULT_KB_PATH.read_bytes())
+            schema_detected = df.attrs.get("schema_detected")
+            if schema_detected == "protocol_database":
+                st.info(
+                    "Schema detected: Protocol Database format. "
+                    "Columns were auto-mapped to the agent knowledge base schema."
+                )
+            elif schema_detected == "native":
+                st.info("Schema detected: Native evidence schema.")
             response, stats = run_agent(
                 query.strip(),
                 df,
-                uploaded_article_filename=(article.name if article else None),
-                uploaded_article_content=(article.getvalue() if article else None),
             )
             st.session_state.chat_history.append(
                 {"role": "assistant", "content": response.interpreted_constraints}
@@ -300,9 +315,6 @@ if run:
                     st.markdown(f"- {step}")
 
             if response.status != "ok":
-                st.error(
-                    "Insufficient evidence for reliable protocol recommendation. "
-                    "Upload additional approved, peer-reviewed records."
-                )
+                st.error("insufficient evidence in uploaded CSV")
         except Exception as exc:
             st.exception(exc)

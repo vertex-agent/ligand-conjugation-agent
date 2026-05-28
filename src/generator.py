@@ -42,19 +42,12 @@ def generate_response(user_query: str, retrieved: List[RetrievedEvidence], trace
     if len(retrieved) < 2 or score < 0.22:
         return AgentResponse(
             status="insufficient_evidence",
-            interpreted_constraints=f"Query parsed: {user_query}",
+            interpreted_constraints="insufficient evidence in uploaded CSV",
             protocol_options=[],
             evidence_mapping=[],
-            risk_flags=[
-                "Evidence coverage is too sparse to provide reliable protocol guidance.",
-                "Any uncited recommendation is blocked by policy.",
-            ],
+            risk_flags=[],
             confidence=score,
-            additional_data_needed=[
-                "Add approved studies matching nanoparticle platform and ligand class.",
-                "Provide protocol-condition details (ratios, pH, buffers, reaction time).",
-                "Include outcome metrics for conjugation efficiency and stability.",
-            ],
+            additional_data_needed=[],
             citations=citations,
             orchestration_trace=trace,
         )
@@ -73,19 +66,12 @@ def generate_response(user_query: str, retrieved: List[RetrievedEvidence], trace
 
     return AgentResponse(
         status="ok",
-        interpreted_constraints=f"Query parsed: {user_query}",
+        interpreted_constraints=f"Query from CSV evidence: {user_query}",
         protocol_options=protocol_options,
         evidence_mapping=evidence_mapping,
-        risk_flags=[
-            "Check transferability if model system differs from intended biological context.",
-            "Validate ligand density and surface charge impact before scale-up.",
-            "Treat low-sample studies as directional evidence only.",
-        ],
+        risk_flags=[f"Limitations from retrieved evidence: {hit.record.limitations}" for hit in top if hit.record.limitations],
         confidence=score,
-        additional_data_needed=[
-            "Negative-result studies for failure mode coverage.",
-            "Manufacturing constraints (scale, purification limits).",
-        ],
+        additional_data_needed=[],
         citations=citations,
         orchestration_trace=trace,
     )
