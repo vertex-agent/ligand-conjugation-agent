@@ -146,6 +146,20 @@ div[data-testid="stAppViewContainer"] h3 {
   font-weight: 650;
 }
 
+/* Result subheaders on dark main panel */
+section[data-testid="stMain"] h3#interpreted-constraints,
+section[data-testid="stMain"] h3#protocol-options,
+section[data-testid="stMain"] h3#evidence-mapping,
+section[data-testid="stMain"] h3#risk-flags,
+section[data-testid="stMain"] h3#additional-data-needed,
+section[data-testid="stMain"] h3#citations {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+section[data-testid="stMain"] div[data-testid="stMarkdownContainer"] li {
+  color: rgba(249, 246, 246, 1) !important;
+}
+
 /* Main content block width + spacing */
 section[data-testid="stMain"] > div.block-container {
   padding-top: 4.5rem;
@@ -318,18 +332,13 @@ if run:
                 st.info("Schema detected: Native evidence schema.")
             else:
                 st.info(f"Loaded embedded knowledge base files: {df.attrs.get('kb_file_count', 1)}")
-            response, stats = run_agent(
+            response, _ = run_agent(
                 query.strip(),
                 df,
             )
             st.session_state.chat_history.append(
                 {"role": "assistant", "content": response.interpreted_constraints}
             )
-
-            c1, c2, c3 = st.columns(3)
-            c1.metric("Total records", stats["total_records"])
-            c2.metric("Eligible records", stats["eligible_records"])
-            c3.metric("Retrieved records", stats["retrieved_records"])
 
             st.subheader("Interpreted Constraints")
             st.write(response.interpreted_constraints)
@@ -362,25 +371,6 @@ if run:
                     st.markdown(f"- {citation}")
             else:
                 st.warning("No eligible citations found in provided dataset.")
-
-            st.subheader("Confidence")
-            st.progress(float(response.confidence))
-            st.write(f"Confidence score: **{response.confidence:.2f}**")
-
-            with st.expander("Prompt Engineering Orchestration (Internal Trace)"):
-                st.write("**Persona assignment**")
-                st.write(response.orchestration_trace.persona_assignment)
-                st.write("**Consequence-based prompting**")
-                st.write(response.orchestration_trace.consequence_prompting)
-                st.write("**Chain-of-Knowledge steps**")
-                for step in response.orchestration_trace.chain_of_knowledge_steps:
-                    st.markdown(f"- {step}")
-                st.write("**ReAct loop**")
-                for step in response.orchestration_trace.react_steps:
-                    st.markdown(f"- {step}")
-                st.write("**Hallucination controls**")
-                for step in response.orchestration_trace.hallucination_controls:
-                    st.markdown(f"- {step}")
 
             if response.status != "ok":
                 st.error("insufficient evidence in uploaded CSV")
