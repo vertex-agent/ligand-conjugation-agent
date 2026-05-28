@@ -1,0 +1,2 @@
+source_id,title,year,journal,peer_reviewed,approved,nanoparticle_system,ligand_class,conjugation_chemistry,payload_context,protocol_conditions,outcomes,limitations,doi_or_pmid,quality_score
+SRC-001,Targeted Folate-Modified LNPs for Tumor Delivery,2023,Journal of Drug Delivery,true,true,LNP,Small molecule (folate),EDC/NHS,Oncology payload model,"pH 6.0 activation, 2h coupling, dialysis purification","Improved uptake in folate receptor positive lines; moderate stability increase","Small sample size; limited in vivo duration",10.1000/example1,0.78
