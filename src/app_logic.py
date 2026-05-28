@@ -55,9 +55,46 @@ def _normalize_knowledge_base_df(df: pd.DataFrame) -> pd.DataFrame:
         df[source_columns["conjugation_chemistry"]].fillna("").astype(str).str.strip()
     )
     normalized["payload_context"] = ""
-    normalized["protocol_conditions"] = df[source_columns["notes"]].fillna("").astype(str).str.strip()
+    ratio_col = "Molar Ratio (Ligand:NP)"
+    ph_col = "pH"
+    buffer_col = "Buffer"
+    temp_col = "Temperature (\u00b0C)"
+    time_col = "Incubation Time (h)"
+    eff_col = "Conjugation Efficiency (%)"
+    char_col = "Characterization Method"
+
+    def _opt(col_name: str) -> pd.Series:
+        if col_name in df.columns:
+            return df[col_name].fillna("").astype(str).str.strip()
+        return pd.Series([""] * len(df))
+
+    ratio = _opt(ratio_col)
+    ph = _opt(ph_col)
+    buffer = _opt(buffer_col)
+    temp = _opt(temp_col)
+    inc_time = _opt(time_col)
+    eff = _opt(eff_col)
+    char = _opt(char_col)
+    notes = df[source_columns["notes"]].fillna("").astype(str).str.strip()
+
+    normalized["protocol_conditions"] = (
+        "Molar ratio: "
+        + ratio
+        + " | pH: "
+        + ph
+        + " | Buffer: "
+        + buffer
+        + " | Temperature: "
+        + temp
+        + " | Incubation: "
+        + inc_time
+        + " | Conjugation efficiency: "
+        + eff
+        + " | Notes: "
+        + notes
+    )
     normalized["outcomes"] = df[source_columns["notes"]].fillna("").astype(str).str.strip()
-    normalized["limitations"] = ""
+    normalized["limitations"] = ("Characterization used: " + char).str.strip()
     normalized["doi_or_pmid"] = df[source_columns["doi"]].fillna("").astype(str).str.strip()
     normalized["quality_score"] = 0.75
     normalized.attrs["schema_detected"] = "protocol_database"

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pandas as pd
 import streamlit as st
 
 from src.app_logic import load_dataframe_from_upload, run_agent
@@ -9,16 +10,46 @@ from src.app_logic import load_dataframe_from_upload, run_agent
 
 st.set_page_config(page_title="VERTEX", layout="wide")
 
-DEFAULT_KB_PATH = Path(__file__).resolve().parent / "knowledge_base_protocol_database.csv"
+KB_DIR = Path(__file__).resolve().parent
+EMBEDDED_KB_GLOB = "knowledge_base*.csv"
+
+
+def load_embedded_kb_dataframe() -> pd.DataFrame:
+    kb_paths = sorted(KB_DIR.glob(EMBEDDED_KB_GLOB))
+    if not kb_paths:
+        raise FileNotFoundError(
+            f"No embedded knowledge base CSV files found (expected pattern: {EMBEDDED_KB_GLOB})"
+        )
+
+    dfs: list[pd.DataFrame] = []
+    schemas: set[str] = set()
+    for kb_path in kb_paths:
+        df = load_dataframe_from_upload(kb_path.name, kb_path.read_bytes())
+        schemas.add(str(df.attrs.get("schema_detected", "unknown")))
+        dfs.append(df)
+
+    merged = pd.concat(dfs, ignore_index=True)
+    merged.attrs["schema_detected"] = ", ".join(sorted(schemas))
+    merged.attrs["kb_file_count"] = len(kb_paths)
+    return merged
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []  # list[dict[str, str]] with keys: role, content
+if "query_input" not in st.session_state:
+    st.session_state.query_input = ""
 
 st.title("VERTEX")
 st.markdown(
-    "Vertex is a specialized scientific AI agent for **literature-grounded protocol reasoning** in ligand–nanoparticle "
-    "conjugation workflows. It surfaces actionable options, maps each option back to supporting evidence, flags risks and "
-    "limitations, and abstains when evidence is insufficient."
+    """
+Hi! I'm VERTEX, your conjugation protocol advisor for targeted drug delivery systems.  
+Tell me what you're working on and I'll generate a complete, literature-backed methodology with reagent ranges, step-by-step protocols, and citations.
+
+I work with:  
+Ligands: transferrin, antibodies, peptides (RGD, cRGD)  
+Nanoparticles: silica, liposomes, PLGA  
+Chemistries: EDC/NHS, maleimide-thiol, PEGylation  
+You don't need to be specific — just describe what you want to do and I'll ask the right follow-up questions to build your protocol.
+"""
 )
 
 st.markdown(
@@ -217,11 +248,42 @@ with st.sidebar:
     st.caption("Embedded source (CSV-only)")
     st.info("Answers are generated from the embedded protocol CSV knowledge base.")
 
+st.caption("Try a preset question:")
+preset_col_1, preset_col_2, preset_col_3 = st.columns(3)
+with preset_col_1:
+    if st.button(
+        "I want to conjugate transferrin to silica nanoparticles for brain targeting",
+        use_container_width=True,
+        key="preset_q1",
+    ):
+        st.session_state.query_input = (
+            "I want to conjugate transferrin to silica nanoparticles for brain targeting"
+        )
+with preset_col_2:
+    if st.button(
+        "Help me design an RGD peptide conjugation protocol for PLGA nanoparticles",
+        use_container_width=True,
+        key="preset_q2",
+    ):
+        st.session_state.query_input = (
+            "Help me design an RGD peptide conjugation protocol for PLGA nanoparticles"
+        )
+with preset_col_3:
+    if st.button(
+        "What's the best chemistry for attaching antibodies to liposomes?",
+        use_container_width=True,
+        key="preset_q3",
+    ):
+        st.session_state.query_input = (
+            "What's the best chemistry for attaching antibodies to liposomes?"
+        )
+
 query_col, button_col = st.columns([0.92, 0.08], vertical_alignment="bottom")
 with query_col:
     st.markdown("**How can I help you?**")
     query = st.text_area(
         "How can I help you?",
+        key="query_input",
         placeholder="Example: Optimize folate-conjugated LNP protocol for targeted delivery in solid tumor models with improved stability.",
         height=120,
         label_visibility="collapsed",
@@ -237,13 +299,13 @@ if run:
         st.error("Enter a research question.")
     else:
         try:
-            if not DEFAULT_KB_PATH.exists():
-                msg = f"Knowledge base CSV not found: {DEFAULT_KB_PATH}"
+            try:
+                df = load_embedded_kb_dataframe()
+            except FileNotFoundError as kb_err:
+                msg = str(kb_err)
                 st.error(msg)
                 st.session_state.chat_history.append({"role": "assistant", "content": msg})
                 st.stop()
-
-            df = load_dataframe_from_upload(DEFAULT_KB_PATH.name, DEFAULT_KB_PATH.read_bytes())
             schema_detected = df.attrs.get("schema_detected")
             if schema_detected == "protocol_database":
                 st.info(
@@ -252,6 +314,8 @@ if run:
                 )
             elif schema_detected == "native":
                 st.info("Schema detected: Native evidence schema.")
+            else:
+                st.info(f"Loaded embedded knowledge base files: {df.attrs.get('kb_file_count', 1)}")
             response, stats = run_agent(
                 query.strip(),
                 df,
