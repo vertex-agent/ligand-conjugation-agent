@@ -9,7 +9,7 @@ from src.app_logic import load_dataframe_from_upload, run_agent
 
 st.set_page_config(page_title="VERTEX", layout="wide")
 
-DEFAULT_KB_PATH = Path("/Users/wonlee/Desktop/Knowledge Base - Protocol Database.csv")
+DEFAULT_KB_PATH = Path(__file__).resolve().parent / "knowledge_base_protocol_database.csv"
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []  # list[dict[str, str]] with keys: role, content
@@ -27,8 +27,8 @@ st.markdown(
 /* --- Professional scientific styling (light, publication-like) --- */
 
 /* --- Typography overrides from browser preview --- */
-/* Change 1: stMarkdownContainer text color */
-div[data-testid="stMarkdownContainer"] {
+/* Keep dark text in main area only; sidebar has its own light text theme */
+section[data-testid="stMain"] div[data-testid="stMarkdownContainer"] {
   color: rgba(0, 0, 0, 1) !important;
 }
 
@@ -81,6 +81,9 @@ div[data-testid="stHeadingWithActionElements"] h2 {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
   color: rgba(255, 255, 255, 1) !important;
 }
+section[data-testid="stSidebar"] div[data-testid="stHeadingWithActionElements"] h2 {
+  color: rgba(255, 255, 255, 1) !important;
+}
 
 /* Slightly tighter, cleaner typography */
 .stApp {
@@ -112,7 +115,7 @@ div[data-testid="stAppViewContainer"] h3 {
 
 /* Main content block width + spacing */
 section[data-testid="stMain"] > div.block-container {
-  padding-top: 3.0rem;
+  padding-top: 4.5rem;
   padding-bottom: 2.25rem;
   max-width: 1100px;
 }
@@ -211,9 +214,8 @@ with st.sidebar:
 
     st.divider()
     st.subheader("Knowledge base")
-    st.caption("Locked source (CSV-only)")
-    st.code(str(DEFAULT_KB_PATH))
-    st.info("All answers are generated only from this CSV knowledge base.")
+    st.caption("Embedded source (CSV-only)")
+    st.info("Answers are generated from the embedded protocol CSV knowledge base.")
 
 query_col, button_col = st.columns([0.92, 0.08], vertical_alignment="bottom")
 with query_col:
