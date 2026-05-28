@@ -4,11 +4,13 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+from dotenv import load_dotenv
 
 from src.app_logic import load_dataframe_from_upload, run_agent
 
 
 st.set_page_config(page_title="VERTEX", layout="wide")
+load_dotenv()
 
 KB_DIR = Path(__file__).resolve().parent
 EMBEDDED_KB_GLOB = "knowledge_base*.csv"

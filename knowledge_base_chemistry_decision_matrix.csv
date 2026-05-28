@@ -1,0 +1,357 @@
+Ligand Type,NP Type,Recommended Chemistry,Why This Chemistry,Alternative Chemistry,Key Constraint,Critical pH Range,Typical Efficiency Range (%),Supporting Entries,"Key References (author, year)",Key Finding / Protocol Notes
+Transferrin (Tf),"Magnetic/Polymeric
+ Silica NP
+ (MNP-MSN, F127/P123-TMOS)","EDC/NHS
+ (amide bond)","Tf Lys residues form amide bonds with surface –COOH (PF-127/succinic anhydride or carboxylated Pluronic). Standard 2-step: activate COOH 4 h RT, add Tf dropwise, couple 4 °C overnight. BCA-confirmed Tf loading; DOX EE 95.7% (Entry 2).","Maleimide–thiol
+ (SM(PEG)8,
+ Entry 6)","Activate COOH with EDC/NHS BEFORE Tf addition (15–30 min). Do NOT mix EDC + Tf + NPs simultaneously. Remove excess EDC by ultracentrifuge (93,000 g, 30 min) or quench with 2-ME before coupling. High EDC ratios risk Tf self-crosslinking.","~7.4 PBS
+ (activation + coupling)","DOX EE ~22.6%
+ (Entry 1);
+ BCA: slight Tf loss
+ (Entry 2);
+ EE 95.7% (Entry 2)","1, 2, 2003","Situ, 2018
+ Kim, 2019
+ Morales, 2020","Entry 1: Activate COOH on PF-127-MSN with EDC(1mg/mL)+NHS(1mg/mL), 4h RT. Add Tf dropwise, 4°C overnight. Centrifuge+wash+lyophilize. Entry 2: EDC+NHS 0.25M, stir 15min RT, add 130µg Tf in PBS, overnight. Ultracentrifuge 93,000g 30min to remove unbound Tf. Entry 3: NH2-MSN coated with chitosan or PLGA; Tf via EDC/NHS; pore size 2.5–5.2nm for gemcitabine."
+Transferrin (Tf),"Fluorescent Silica NP
+ (APTS-SiNP, Stöber ~50 nm)","Maleimide–thiol
+ (SM(PEG)8 linker)","APTS amine surface reacted with SM(PEG)8 to install terminal maleimide. Tf thiolated with TCEP (1:1 molar, 5 min). NP-PEG-Mal + Tf-SH at 1:1 mass ratio, 2h RT 400 rpm. PEG8 spacer reduces steric hindrance. Uptake pathway depends on PEG architecture (Entry 6).","EDC/NHS
+ (amide bond,
+ Entries 1–3)","TCEP 1:1 molar to Tf — do NOT over-reduce (unfolds protein). Quench β-mercaptoethanol 1 mM, 5 min immediately after coupling. Store at 4°C. Maleimide hydrolyses at pH >7.5 — keep at pH 7.4.","7.4 HEPES
+ (all steps)",">80% Ab/Tf activity
+ retained (Entry 6);
+ uptake pathway
+ confirmed","6, 7","Hristov, 2015
+ Kaihatsu, 2013","Entry 6: SiNP-NH2 (APTS) → SM(PEG)8 (10×, HEPES pH7.4, 1h). TCEP 1:1 to Tf (5 min). Add NP-PEG-Mal + Tf-SH (1:1 mass), 2h RT 400rpm. Quench β-ME 1mM 5min. Wash 4× PBS. Entry 7: Derivatize Tf Lys with sulfo-SMCC (introduces maleimide); thiolate payload with Traut's (1:1, 0°C, 12h, pH 8.0). WARNING: Traut's can reduce Tf disulfides at high pH—use low conc and 0°C."
+Transferrin (Tf),"MSN
+ (redox-cleavable,
+ ~110 nm)","Disulfide bond
+ (cystamine linker)",Tf grafted via redox-cleavable disulfide bonds — serves as BOTH capping agent AND targeting ligand (Entry 5). GSH in tumor microenvironment triggers Tf detachment + simultaneous drug release. Eliminates need for separate cap and ligand.,"EDC/NHS
+ (amide bond,
+ Entries 1–3)",Disulfide NOT stable in systemic circulation (plasma GSH ~5 µM). Use ONLY for intracellular GSH-triggered release. Not suitable if blood-stable conjugate required.,~7.4 PBS,"Redox-responsive
+ release confirmed;
+ quantitative CE not
+ reported (Entry 5)",5,"Chen X., 2017",Entry 5: Tf grafted via disulfide bonds to MSN surface using cystamine dihydrochloride linker. Tf acts as dual capping + targeting agent. GSH-triggered release in tumor microenvironment confirmed. FTIR + DLS characterization.
+Transferrin (Tf),"PEGylated NP
+ (8arm-PEG-DHA, ~147 nm;
+ PLGA-PEG, ~200 nm)","EDC/NHS
+ (amide bond,
+ PEG-COOH terminus)",8arm-PEG-COOH (10 kDa) conjugated to DHA; EDC(4mg)+NHS(6mg) activate terminal COOH; 8mg Tf in PBS coupled RT 6h then dialyzed MWCO 30kDa (Entry 4). PLGA-PEG-COOH terminus used for Tf variant (oxalate) — oxalate variant showed 3× lower IC50 vs native Tf (Entry 17).,"Maleimide–thiol
+ (PLGA-PEG-Mal +
+ Traut's, Entry 19)","PEGylation can bury –COOH groups. Verify accessible carboxyl density before coupling. Dialysis (MWCO 30kDa, 12h) required to remove free Tf (Entry 4). For PLGA-PEG systems, activate at MES pH 6 then transfer to PBS pH 7.4 for coupling.","~7.4 PBS
+ (activation + coupling);
+ MES pH 6 → PBS 7.4
+ (for PLGA-PEG)","Drug loading ~10 wt%
+ (Entry 4);
+ EE 86.2%, DL 7.8%
+ (Entry 15-type);
+ 3× IC50 reduction,
+ oxalate Tf (Entry 17)","4, 17, 18","Yin, 2016
+ Luo, 2017
+ Cui, 2017","Entry 4: Dissolve 50mg PEG-conjugate in 10mL PBS. Add EDC(4mg)+NHS(6mg), stir RT 15min. Add 8mg Tf in 5mL PBS, stir RT 6h. Dialyze MWCO 30kDa vs PBS 12h. Lyophilize. Entry 17: PLGA-PEG-Tf NPs in 3D PLGA scaffolds; oxalate Tf variant > native Tf. Entry 18: Non-covalent Tf adsorption on PLGA (simpler but less stable — included as comparator)."
+Transferrin (Tf),"Lipid-coated PLGA NP
+ (MB-DOPE + DSPE-PEG,
+ ~170 nm)","Maleimide–thiol
+ (post-insertion,
+ Traut's reagent)","Tf thiolated with Traut's 5× excess (HEPES pH 8). Tf-SH coupled to MB-DOPE micelles (1:10 protein:lipid, 37°C, 1h). Post-inserted into drug-loaded PLGA NPs (37°C, 1h). IC50 0.77–1.21 nM (Tf-NP) vs 1.90–3.41 nM non-targeted (Entry 19).","EDC/NHS
+ (PLGA-COOH terminus)","MBS-DOPE synthesis required first (MBS + DOPE in CHCl3 + TEA, overnight RT). Traut's 5× at pH 8 — risk of Tf disulfide reduction at higher ratios. Post-insertion at 37°C ≤1h to avoid lipid phase artefacts.","8.0 HEPES
+ (thiolation)
+ → ~7.4
+ (coupling + insertion)","Drug loading 36.3±3.4%;
+ zeta −18.9 mV;
+ IC50 0.77–1.21 nM vs
+ 1.90–3.41 nM
+ (Entry 19)",19,"Li (Lee lab), 2013","Entry 19: (1) Synthesize MB-DOPE (MBS+DOPE in CHCl3+TEA, overnight RT). (2) Form micelles. (3) Thiolate Tf (5× Traut's, HEPES pH 8, 1h). (4) Mix Tf-SH with MB-DOPE micelles 1:10 protein:lipid, 37°C, 1h. (5) Post-insert Tf-DOPE into drug-loaded PLGA NPs, 37°C, 1h. Characterized by DLS, zeta, HPLC, aromatase inhibition."
+Transferrin (Tf),"PLGA NP
+ (bare, 50:50,
+ ~200 nm)","EDC/NHS
+ (amide bond,
+ PLGA terminal –COOH)","PLGA 50:50 provides terminal –COOH without modification. Activate with EDC (20× molar excess), agitate RT 30min, add Tf (2× excess), agitate 1h RT (Entry 14). Target ~100 Tf/NP. BCA quantification of unbound Tf in supernatant confirms loading. Enhanced uptake in cancer cells vs non-targeted.","Physical adsorption
+ (non-covalent,
+ Entry 18 — less stable)","EDC 20× molar excess needed for sufficient activation. Quantify unbound Tf by BCA (supernatant method). CMC-coated PLGA (Entry 16): activate with EDC 2mM + NHS 5mM in NaCl pH 5.5, 15min; quench with 2-mercaptoethanol 20mM before adding Tf.","5.5 NaCl
+ (Entry 16 activation)
+ or aqueous
+ (Entry 14)
+ → PBS 7.4 (coupling)","EE 86.2%, DL 7.8%
+ (Entry 15);
+ CE measured by BCA
+ supernatant
+ (Entry 14);
+ zeta −17.4 mV","14, 15, 16","Ramalho, 2023
+ Singh, 2023
+ Xi Lin, 2017","Entry 14: Activate PLGA-COOH with EDC (20× excess), agitate RT 30min. Add Tf (2× excess), agitate 1h RT. Centrifuge, resuspend in water. BCA quantification. Entry 15: Double emulsification → PLGA NPs → EDC/NHS coupling with Tf. Confirmed by TEM/SEM/FTIR. Enhanced intranasal brain uptake in rats. Entry 16: CMC-COOH surface. EDC 2mM + NHS 5mM in NaCl pH 5.5, 15min. Quench with 2-ME 20mM. Centrifuge 1000rpm 10min 4°C. Then add Tf."
+Transferrin (Tf),"Liposome
+ (SPC/Chol/DSPE-PEG,
+ DSPC/Chol/DSPE-PEG-Mal,
+ ~85–130 nm)","Maleimide–thiol
+ (post-insertion,
+ Traut's reagent +
+ DSPE-PEG2000-Mal)","Tf thiolated with Traut's (1:5 or 3:1 protein:Traut). Coupled to DSPE-PEG2000-Mal micelles then post-inserted into preformed liposomes (Entries 8,9) OR DSPE-PEG-Mal incorporated during formation + Tf coupled post-extrusion (Entry 10). DOX EE 95% (Entry 8). EE ERN 68.5% (Entry 9). >90% DSPE-PEG-Mal retained by Ellman's (Entry 10).","EDC/NHS
+ (DSPE-PEG2000-COOH,
+ Entry 37-type)",Traut's ratio critical: 1:5 (Entry 8) or 3:1 (Entry 10) — higher ratios risk reducing Tf disulfides. Quench β-mercaptoethanol 15min after coupling. Thermal equilibration at 55°C 1h for post-insertion (Entry 10) — do NOT exceed 1h.,"7.4 HEPES/PBS
+ (coupling);
+ 55°C for insertion
+ (Entry 10)","EE DOX 95%
+ (Entry 8);
+ EE ERN 68.5%
+ (Entry 9);
+ >90% DSPE-PEG-Mal
+ retained (Entry 10)","8, 9, 10, 12","Chen, 2015
+ Maroof, 2026
+ Bresseleers, 2022
+ Khan, 2021","Entry 8: Thiolate Tf (Traut 1:5 RT). Couple Tf-SH to DSPE-PEG2000-Mal micelles. Post-insert into DOX liposomes. IC50 decreased 68.7% vs plain. Entry 9: Tf-SH + Mal-mPEG2000-DSPE → post-insert into LP-ERN at 100:1 lipid:conjugate, 37°C, 30min. Entry 10: Add DSPE-PEG-Mal (25mg/mL DMSO) at 1mol%, 55°C 1h. Thiolate Tf (Traut 3:1, 1h). Couple 1:1 DSPE:Tf, overnight 4°C. Quench β-ME 15min. Entry 12: Ab:DSPE-PEG-Mal 1:10, 4°C 4h stirring; ultracentrifuge 55,000rpm 1h."
+"Transferrin
+ (anti-TfR mAb OX26)","Liposome
+ (DSPC/Chol/DSPE-PEG,
+ ~85 nm, BBB delivery)","Maleimide–thiol
+ (Traut's 1:40 molar +
+ DSPE-PEG-Mal)",Landmark Huwyler/Pardridge 1996 BBB immunoliposome protocol. OX26 mAb thiolated at very low Traut's ratio (1:40 mAb:Traut) to limit to ~1 thiol/mAb. ~10% coupling efficiency; ~30 Ab/liposome optimal for brain delivery. Enhanced pharmacokinetics in rats confirmed.,"EDC/NHS
+ (higher crosslinking
+ risk)",mAb:Traut 1:40 — lower than for other Abs (prevents >1 thiol/mAb from aggregating). Coupling efficiency not affected by mAb concentration at 100–400:1 phospholipid:mAb ratio. Exchange buffer to phosphate pH 8.0 before coupling. Separate on Sephadex CL-4B.,"8.5 borate
+ (Traut's thiolation)
+ → 8.0 phosphate
+ (coupling)","~10% coupling
+ efficiency;
+ ~30 Ab/liposome
+ optimal;
+ BBB crossing confirmed
+ in rats (Entry 11)","11, 34","Huwyler
+ (Pardridge lab), 1996","Entry 11/34: Thiolate OX26 mAb (Traut's 1:40, 0.15M Na-borate + 0.1mM EDTA pH 8.5, 60min RT). Ellman's: avg 1 thiol/mAb. Exchange to 0.1M Na-phosphate pH 8.0. React immediately with DSPE-PEG-Mal liposomes overnight RT. Separate on Sephadex CL-4B. Radiolabeling (3H-cholesterol) for PK in rats."
+"Antibody (full IgG)
+ (anti-EGFR cetuximab,
+ fluorescein-Ab)","Silica NP
+ (APTES-NH2, carboxylated
+ SiO2, ORMOSIL-PEG,
+ ~30–150 nm)","EDC/NHS
+ (amide bond,
+ NP surface –COOH)","APTES-functionalized SiNPs → EDC/NHS couples Ab Lys residues to NP –COOH or installs COOH via PEG2000-COOH (Entry 25). ORMOSIL-PEG-COOH: activate with EDC/Sulfo-NHS MES pH 6 (15min), desalt, add cetuximab in PBS pH 7.4, 2h RT (Entry 25). ~262.5 ng Ab per 3mg NPs (Entry 22). CE 1–20% typical for random Lys coupling.","Maleimide–thiol
+ (PEG-Mal surface,
+ Entries 23, 26, 27)","Use Sulfo-NHS (water-soluble) not NHS for NP-surface activation. Activate NP-COOH FIRST, desalt, THEN add Ab — do NOT mix EDC + Ab + NPs simultaneously. Two-buffer protocol (MES pH 6 activation → PBS pH 7.4 coupling) maximizes NHS-ester stability.","~6.0 MES
+ (activation)
+ → ~7.4 PBS
+ (coupling)","CE 1–20%
+ (random Lys coupling,
+ Entry 29);
+ ~262.5 ng Ab/3mg NP
+ (Entry 22)","22, 25, 29","Watermann, 2019
+ Bhattacharya, 2009
+ Duwa, 2020","Entry 22: APTES-SiNPs (~45nm) + EDC/NHS in 0.9% NaCl, 12h coupling. Entry 25: Synthesize ORMOSIL (APTS+VPTES in AOT/DMSO/water microemulsion). PEGylate with PEG2000-COOH. Activate COOH (EDC/Sulfo-NHS, MES pH 6, 15min). Desalt. Add cetuximab in PBS pH 7.4, 2h RT. Wash by centrifugation. Entry 29: SiO2-COOH NPs 1mg/mL; EDC 0.4mg + Sulfo-NHS 1.1mg in MES pH 6, 30min; PBS pH 7.4; cetuximab 25µg/mg NP, 1–2h RT; quench hydroxylamine 10mM 10min."
+"Antibody (full IgG)
+ (anti-CD105 TRC105,
+ trastuzumab anti-HER2)","Mesoporous Silica NP
+ (mSiO2-PEG, PEI-PEG,
+ ~50–80 nm)","Maleimide–thiol
+ (dual PEGylation +
+ TCEP or Traut's
+ thiolation)","Two-step PEGylation on mSiO2: Mal-PEG5k-NH2 for surface amine, then Mal-PEG5k-SCM for terminal maleimide. TCEP reduces TRC105 disulfides → Ellman's confirms –SH. React TRC105-SH with NP-PEG-Mal, 2h RT. ~17.5% ID/g tumor at 24h by PET (Entry 23). 9-month lyophilized stability maintained (Entry 24).","EDC/NHS
+ (PEG-COOH surface,
+ Entries 22, 25)",TCEP reduction must be confirmed by Ellman's assay before coupling. Quench β-mercaptoethanol 1mM after coupling. TCEP-reduced Ab must be used IMMEDIATELY — thiols re-oxidize within 30–60min. Add 2mM EDTA to all buffers.,"7.4 PBS
+ (all steps)","~17.5% ID/g tumor
+ at 24h PET (Entry 23);
+ tumor:muscle >5:1
+ (Entry 26);
+ 9-month stability
+ (Entry 24)","23, 24, 26, 27","Chen, 2013
+ (ACS Nano)
+ Wongrakpanich, 2018
+ Hristov, 2015","Entry 23/26: Thiolate mSiO2 with MPS at 86–90°C ethanol. PEGylate with Mal-PEG5k-NH2 overnight RT. Install NOTA then Mal-PEG5k-SCM. TCEP-reduce TRC105, react with NP-PEG-Mal 2h RT. Entry 24: MSNP-PEI (4:1 mass PEI); cross-link DSP 40min; Mal-PEG5k-NHS (1:1) in PBS pH 7.2 2h; Traut's 50× to trastuzumab pH 8.0 2h; Ab-SH + MSNP-PEI-PEG overnight 4°C. Entry 27: SM(PEG)8 (10×, HEPES pH 7.4, 1h). TCEP 1:1 Ab, 5min. 1:1 mass coupling 2h RT 400rpm. Quench β-ME 1mM."
+"Antibody (anti-CD44,
+ anti-EGFR)
+ [DBCO-azide click]","PEI-coated MSN
+ (azide-functionalized,
+ DOX-loaded, ~130 nm)","SPAAC Click chemistry
+ (azide–DBCO,
+ copper-free)","Bioorthogonal click: PEI-MSNP azide-functionalized via NHS-PEG4-N3 (borate pH 8.5, 4h). Ab DBCO-labelled via DBCO-PEG4-NHS (10eq, borate pH 8.5, 6h). Purify DBCO-Ab on Zeba 40K. Mix DBCO-Ab (100µg) with N3-NP (10mg/mL), overnight RT (Entry 28). Specific uptake in EGFR+ A431 cells; no uptake in EGFR− HEK293.","EDC/NHS
+ (simpler but
+ less selective)",DBCO labelling: avoid >15 DBCO/Ab (causes aggregation). Zeba spin-column purification required to remove excess DBCO-PEG4-NHS before NP mixing. Click reaction overnight RT (slower than thiol-maleimide 2h). Borate buffer pH 8.5 for all NHS steps.,"8.5 borate
+ (NHS labelling steps)
+ → 7.4 PBS
+ (click conjugation)","Functional uptake
+ confirmed in EGFR+
+ cells; quantitative CE
+ not reported (Entry 28)",28,"Sánchez-Bellver,
+ 2022","Entry 28: Coat MSNP with 0.75% PEI (pH 7, 1:1, 3h). Add NHS-PEG4-N3 (1.5mg in DMSO) in borate pH 8.5, stir 4h. Centrifuge. Label Ab with DBCO-PEG4-NHS (10eq, borate pH 8.5, 6h). Purify on Zeba 40K. Mix DBCO-Ab (100µg) with N3-NP (450µL × 10mg/mL), overnight RT. Centrifuge, wash. DOX released in acidic lysosomes confirmed by confocal."
+"Antibody (full IgG)
+ (cetuximab anti-EGFR,
+ anti-TNFR2 mAb)","PLGA NP / PLGA-PEG NP
+ (bare PLGA-COOH or
+ PLGA-PEG-NHS,
+ ~105–128 nm)","EDC/NHS
+ (amide bond,
+ PLGA terminal –COOH
+ or PLGA-PEG-NHS)","Direct PLGA –COOH activation. MES pH 6 activation (30min) → PBS pH 7.4 coupling (2h RT). Cetuximab 25µg/mg NP (Entry 39: CE ~40%; Entry 40: CE 39.77±3.4%). PLGA-PEG-NHS NPs couple Ab primary amine directly (Entry 38, anti-TNFR2). In vivo tumor growth inhibition confirmed in MC38 colon cancer model.","Maleimide–thiol
+ (PLGA-PEG-Mal,
+ Entries 41, 42, 43;
+ stronger stability)",CE ~40% for random Lys coupling. Use Sulfo-NHS not NHS for water-soluble activation. Quench excess EDC with 2-ME BEFORE Tf/Ab addition (Entry 16-type) to prevent crosslinking. At high Ab concentrations: use dilute conditions to avoid inter-NP crosslinking (Entry 37 note).,"~6.0 MES
+ (activation)
+ → ~7.4 PBS
+ (coupling)","CE ~40% (Entry 39);
+ CE 39.77±3.4%
+ (Entry 40);
+ f(ab')2 CE 26–47%
+ vs IgG 7–15%
+ (Entry 21)","21, 38, 39, 40","Duwa, 2020
+ Wan, 2023
+ Saleh, 2018
+ Lee, 2021","Entry 39: TMZ-PLGA NPs by single emulsion. Activate COOH with EDC+Sulfo-NHS in MES pH 6.0, 30min RT. Exchange to PBS pH 7.4. Add cetuximab 25µg/mg NP, stir 2h RT. Centrifuge, wash 3× PBS. Entry 40: Same protocol; CE 39.77±3.4%; zeta −31.0±0.8mV. Entry 38: PLGA-PEG-NHS NPs + anti-TNFR2 in PBS pH 7.4, 2h RT, wash 3×. Entry 21: f(ab')2 fragments gave 26–47% CE vs 7–15% for full IgG — prefer fragments for efficiency."
+"Antibody (full IgG
+ or f(ab')2 fragment)
+ (anti-FZD7, anti-CD8a,
+ anti-CD133)","PLGA-PEG-Maleimide NP
+ (Mal-PEG-PLGA,
+ ~100–220 nm)","Maleimide–thiol
+ (TCEP or DTT reduction
+ + NP-PEG-Mal surface)","TCEP 100× to Ab → ~4 free thiols/Ab confirmed by Ellman's (Entry 41). High loading: 1,063±97 Ab/NP vs 192 Ab/NP at low loading. IdeS protease → f(ab')2 → DTT 10mM exposes hinge –SH for site-selective coupling (Entry 42). Maleimide method: 99% Ab retained at 5 days vs 84% for EDC/NHS (Entry 42). sulfo-SMCC installs maleimide on PLGA-PEG-NH2 NPs (Entry 43).","EDC/NHS
+ (PLGA-COOH,
+ Entries 39, 40;
+ lower 5-day stability)",PLGA-PEG-Mal NPs must be freshly prepared — maleimide groups hydrolyse at pH >7. Verify maleimide availability by Ellman's before coupling. Use PBS + 2mM EDTA to prevent thiol oxidation. TCEP-reduced Ab must react immediately with NPs.,"7.4 PBS + 2mM EDTA
+ (all steps)","1,063±97 Ab/NP
+ (TCEP, Entry 41);
+ 99% Ab retained @ 5d
+ (maleimide, Entry 42);
+ vs 84% for EDC/NHS","20, 41, 42, 43","Patel, 2024
+ (ACS Omega)
+ Lim, 2021
+ Swaminathan, 2018","Entry 41: TCEP 100× to Ab, PBS+2mM EDTA, 4°C overnight. Mix Ab-SH with PLGA-PEG-Mal NPs. Purify by centrifugation. Ellman's + ELISA confirmation. Entry 42: IdeS protease cleaves Ab → f(ab')2. DTT 10mM (2.5µL per 100µg Ab). Desalt 7kDa MWCO. 2h coupling 25°C shaking. 5-day stability: 99% Ab retained. Entry 43: Sulfo-SMCC (10× molar, PBS pH 7.4, 1h) installs maleimide on PLGA-PEG-NH2. Traut's 1:5 to anti-CD133 Ab (1h). Ab-SH + NP-Mal (25µg/mg NP, PBS+EDTA, 2h RT)."
+"Antibody (full IgG
+ or VHH/Fab' fragment)
+ (trastuzumab, cetuximab,
+ anti-HER2 VHH)","Liposome
+ (DSPC/Chol/DSPE-PEG2000-Mal,
+ HSPC/Chol/DSPE-PEG-Mal,
+ ~90–130 nm)","Maleimide–thiol
+ (Traut's 3:1 or TCEP
+ + DSPE-PEG2000-Mal;
+ post-insertion or
+ during formation)",Standard immunoliposome method. DSPE-PEG2000-Mal at 0.5–1mol% provides PEG stealth + reactive maleimide. Traut's 3:1 (protein:Traut) introduces –SH on Ab. Couple overnight 4°C. EE ~90% rapamycin (Entry 30). ~30 Ab/liposome optimal (Entry 32). Bispecific VHH-liposomes: 10-fold uptake increase (Entry 33). Fab' fragment via 2-MEA reduction (Entry 36).,"EDC/NHS
+ (DSPE-PEG-COOH,
+ Entry 37;
+ higher crosslinking risk)","DSPE-PEG2000-Mal post-insertion: 55°C, 1h (Entry 35) — verify Mal retention >90% by Ellman's. Traut's 3:1 for trastuzumab/cetuximab (Entries 30, 32, 35). For Fab' fragments use 2-MEA 10mM 37°C 90min instead (Entry 36). Purify by SEC (Sephadex CL-4B) or ultrafiltration MWCO 100kDa to remove unbound Ab.","8.0–8.5 borate
+ (Traut's thiolation)
+ → 7.4 PBS
+ (coupling);
+ 55°C for post-insertion","EE ~90% rapamycin
+ (Entry 30);
+ ~30 Ab/liposome
+ (Entry 32);
+ >90% DSPE-PEG-Mal
+ retained (Entry 35);
+ 10× uptake bispecific
+ VHH (Entry 33)","30, 32, 33, 35, 36","Eloy, 2017
+ Petrilli, 2017
+ Nikkhoi, 2021
+ Bresseleers, 2022
+ Pan, 2007","Entry 30: Thin-film hydration/extrusion (DSPC:Chol:DSPE-PEG2000-Mal 56:39:0.5–1mol). Traut's 3:1 1h RT. Couple overnight 4°C. Wash MWCO 100kDa. Entry 32: Same; Sephadex CL-4B cleanup. ~30 Ab/liposome. Entry 33: HSPC:Chol:DSPE-PEG2000:DSPE-PEG2000-Mal 56:38:3:3mol. Engineered Cys-VHH, TCEP 30min, couple 2h RT. Entry 35: Post-insert DSPE-PEG-Mal (25mg/mL DMSO, 1mol%) at 55°C 1h. Entry 36: Pepsin digest → F(ab')2. 2-MEA 10mM 37°C 90min → Fab'-SH. React with DSPE-PEG-Mal micelles 1:1, 2h RT. Post-insert 37°C 30min."
+"Antibody (trastuzumab)
+ [EDC/NHS liposome
+ alternative]","Liposome
+ (DSPC/Chol/DSPE-
+ PEG2000-COOH,
+ ~100–130 nm)","EDC/NHS
+ (DSPE-PEG2000-COOH
+ at 1mol%)","DSPE-PEG2000-COOH (1mol%) activated with EDC(10×)+Sulfo-NHS(25×) in PBS pH 6, 15min. Quench excess EDC with 2-mercaptoethanol (20mM). Add trastuzumab 1:10 Ab:lipid molar ratio, PBS pH 7.4, 2h RT. CE 20–45%. Dialyze vs PBS (MWCO 300kDa) to remove unbound Ab (Entry 37).","Maleimide–thiol
+ (DSPE-PEG-Mal,
+ Entries 30, 32, 35;
+ more stable, preferred)","Risk of inter-liposome crosslinking with EDC/NHS at high Ab concentrations — use dilute conditions. Dialysis cleanup required (MWCO <1,000kDa Float-A-Lyzer). EDC/NHS less preferred than Mal-thiol for liposomes — crosslinking risk and random orientation.","~6.0 PBS
+ (activation)
+ → ~7.4 PBS
+ (coupling)","CE 20–45%
+ (Entry 37);
+ higher crosslinking
+ risk at high [Ab]",37,"Encapsula/Patel,
+ 2019","Entry 37: Prepare DSPC:Chol:DSPE-PEG2000-COOH liposomes. Activate COOH with EDC(10×)+Sulfo-NHS(25×), PBS pH 6, 15min. Quench excess EDC with 2-ME (20mM). Add trastuzumab at 1:10 Ab:lipid molar ratio, PBS pH 7.4, 2h RT. Dialyze vs PBS (MWCO 300kDa). Risk of crosslinking: use dilute conditions."
+"RGD / cRGD Peptide
+ (linear GRGDS,
+ cyclic cRGDfK, cRGDfc,
+ cRGDfC, RGD-NAMs)","Silica NP / MSN
+ (APTES-NH2,
+ thiol-MSN,
+ vinyl-MSN, ~100–200 nm)","Maleimide–thiol
+ (Mal-PEG12-NHS on
+ MSN-NH2 + Cys-RGD
+ free thiol)",Two-step: (1) React MSN-NH2 with Mal-PEG12-NHS → MSN-PEGmal. (2) Conjugate Cys-RGD-FAM via thiol-maleimide click. Tune RGD density by adjusting peptide:MSN ratio. High density: 29.1 nmol RGD/mg MSN; Low: 14.5 nmol/mg (Entry 47). PEG12 spacer provides antifouling layer and controls surface density precisely.,"EDC/NHS
+ (HA+RGD dual,
+ Entry 46;
+ for non-Cys peptides)
+ Thiol-disulfide
+ exchange (Entry 48)","Maleimide hydrolyses above pH 7.5 — keep coupling buffer at pH 7.4 or below. Thiol-disulfide (Entry 48): MSN-SH activated with 2,2'-DTP then react with Cys-cRGD — different chemistry in same paper vs Tf-epoxide (Entry 48, Ferris 2011). Tune surface density by peptide:NP ratio.","~7.4 PBS
+ (coupling)","High density:
+ 29.1 nmol RGD/mg MSN;
+ Low density:
+ 14.5 nmol/mg
+ (Entry 47 by fluorescence)","44, 46, 47, 48, 49","Diba, 2023
+ Zhou, 2018
+ Ferris, 2011
+ Lee, 2023","Entry 47: (1) React MSN-NH2 with Mal-PEG12-NHS → MSN-PEGmal. (2) Conjugate Cys-RGD-FAM via thiol-maleimide at pH 7.4. FAM fluorescence quantifies RGD density. Entry 48 (disulfide): MSN-SH (3-mercaptopropyltrimethoxysilane) → 2,2'-DTP activation → react with Cys-cRGD. Entry 46: HA+RGD dual targeting via EDC/NHS on GNRs@mSiO2-NH2 surface. DOX loaded with pH-enzyme + NIR-triggered release. Entry 44 (PAA surface): MES pH 6 activation 30min, borate pH 8.0 coupling 16h at 25°C — 78% efficiency gain. Entry 49: thermo+pH responsive pNIBIm-AA-RGD copolymer on vinyl-MSN."
+"RGD / cRGD Peptide
+ (linear GRGDS,
+ cyclic cRGDfK)","PLGA NP /
+ PLGA-PEG NP
+ (Mal-PEG-PLGA,
+ ~200–330 nm)","Maleimide–thiol
+ (Mal-PEG-PLGA surface
+ + Cys-RGD free thiol,
+ HEPES pH 7.0)","KEY REFERENCE (Entry 58, Martínez-Jothar 2018): 84±4% CE at 2:1 Mal:thiol molar ratio, 30min, HEPES pH 7.0. Best NP prep method and storage (4°C > −20°C) also optimized. IAASF technique (Entry 60): PLA-PEG-MAL at emulsion oil–water interface → Mal displayed on NP surface without post-modification. NMR confirms coupling (maleimide proton peak disappears). 2–3× uptake increase; ~2× tumor AUC in vivo.","EDC/NHS
+ (PLGA-COOH or
+ PLGA-PEG-COOH,
+ Entries 56, 57;
+ lower selectivity)",Optimal Mal:thiol = 2:1 (Entry 58); excess thiol (>1:1) causes NP crosslinking. Maleimide availability lower than expected due to PEG-PLGA miscibility burying some Mal groups — verify by Ellman's before coupling. Storage at 4°C preferred over −20°C for Mal-PEG-PLGA NPs.,"7.0 HEPES
+ (coupling,
+ Entry 58 optimal)
+ or ~7.4 PBS","84±4% CE
+ (2:1 Mal:thiol, 30min,
+ Entry 58);
+ CE 40–70%
+ (density-dependent,
+ Entry 59);
+ 2–3× uptake increase
+ (Entry 60)","56, 57, 58, 59, 60","Martínez-Jothar,
+ 2018
+ Martínez-Jothar,
+ 2020
+ Danhier, 2010","Entry 58 (key): Dissolve cRGDfK in HEPES pH 7.0. Mix with Mal-PEG-PLGA NPs at 2:1 Mal:thiol molar ratio. React RT 30min. Quantify free cRGD in supernatant by HPLC. Entry 59: 3 cRGD densities (1:10, 1:5, 1:2 cRGD:Mal) tested under physiological flow (300 s⁻¹). Entry 60 (IAASF): Add PLA-PEG-MAL during PLGA emulsification. NMR confirms coupling. ~2× tumor AUC in vivo (4T1 model). Entry 56/57: Standard EDC/NHS on PLGA-COOH or PLGA-PEG-COOH in MES pH 6.0–6.5, 2–4h RT."
+"RGD / cRGD Peptide
+ (cyclic cRGDfK, cRGDfc,
+ cRGDfC, DSPE-PEG-RGD)","Liposome / LNP
+ (SPC/Chol/DSPE-PEG-Mal,
+ HSPC/Chol/MBPE,
+ DLin-MC3-DMA LNP,
+ ~80–200 nm)","Maleimide–thiol
+ (DSPE-PEG-Mal + Cys-RGD
+ free thiol;
+ post-conjugation
+ for LNP)","Cys-RGD reacts directly with DSPE-PEG2000-Mal — no activation step. 98% CE (Entry 51): couple cRGD to liposome maleimide FIRST, then post-insert DSPE-PEG2000 (sequence critical). MALDI-TOF: quantitative 1:1 DSPE-PEG:RGD coupling confirmed (MW increase = RGD-SH MW, Entry 55). LNP (Entry 61): formulate with 0.5mol% DSPE-PEG-Mal; add Cys-peptide in DMF 1.2× excess; react 2h RT; quench with free L-Cys; 0.5mol% cRGD optimal for transfection.","EDC/NHS
+ (DSPE-PEG-COOH,
+ Entries 53, 54;
+ for non-Cys peptides)","CRITICAL SEQUENCE (Entry 51): couple cRGD BEFORE PEG post-insertion — reverse gives steric blocking of maleimide, CE drops to <20%. Keep under argon/dark (Entry 50) to prevent thiol oxidation. EDTA in buffer prevents metal-catalysed oxidation. pH 6.5 HEPES for Entry 52 (lower than standard).","6.5–7.4
+ (HEPES or PBS);
+ Entry 50: pH 7.2;
+ Entry 52: pH 6.5","98% CE (Entry 51);
+ Quantitative by
+ MALDI-TOF (Entry 55);
+ EE >90% apatinib
+ (Entry 50);
+ 0.5mol% cRGD
+ optimal LNP
+ (Entry 61)","50, 51, 52, 53,
+ 54, 55, 61","Song, 2017
+ Zhao (Jiang lab),
+ 2012
+ Suen, 2011
+ Lokugamage,
+ ~2023","Entry 51 (optimal): (1) Prepare liposomes. (2) Load DOX (ammonium sulfate gradient). (3) Couple cRGD to MBPE-maleimide. (4) Post-insert DSPE-PEG2000. 98% CE. Entry 50: DSPE-PEG2000-Mal in PBS pH 7.2+NaCl+EDTA+TEA; add 2 equiv cRGD; react argon, RT, dark, 12h. Dialyze MWCO 1kDa. Entry 52: cRGD (1mg/mL HEPES pH 6.5) + LCL suspension at 1:10 cRGD:maleimide, overnight. Entry 55: MALDI-TOF confirmed quantitative 1:1 coupling. Entry 61 (LNP/PCT): microfluidics formulation with 0.5mol% DSPE-PEG-Mal. Add Cys-peptide in DMF (1.2× excess). React 2h RT. Quench free L-Cys. Purify 30kDa or 300kDa centrifugal filters."
+"ATWLPPR Peptide
+ (NRP-1 targeting)","Ultrasmall Silica NP
+ (DOTA-Gd, ~3–5 nm)","EDC/HBTU
+ (water/DMSO 1:1,
+ protected peptide)","EDC/HBTU combination for sterically hindered protected peptides in mixed aqueous/organic solvent (water:DMSO 1:1). HBTU activates COOH more efficiently than NHS for protected peptides. Activate DOTA-COOH with EDC/HBTU (5 equiv) 10min, add protected peptide (6 equiv), stir 18h RT. Evaporate solvents. Deprotect side chains with TFA 2h RT (Entry 45).","EDC/NHS
+ (aqueous only;
+ for unprotected
+ hydrophilic peptides)",TFA deprotection step (2h RT) required after coupling — confirm complete deprotection by MS. DMSO co-solvent (1:1 v/v) necessary for peptide solubility; validate NP stability in DMSO before use. Not suitable for base-labile NP coatings.,"Not specified
+ (DOTA-COOH
+ on NP surface)","Functional PDT+MRI
+ theranostic confirmed;
+ quantitative CE not
+ reported (Entry 45)",45,"Benachour, 2012
+ (Theranostics)","Entry 45: Activate DOTA-COOH on NP with EDC+HBTU (5 equiv each) in water/DMSO 1:1 v/v, 10min RT. Add protected ATWLPPR peptide (6 equiv), stir 18h RT. Evaporate solvents. Deprotect side chains with TFA 2h RT. Wash cycles to remove TFA/DMSO. Functional PDT+MRI theranostic NPs confirmed by TEM, DLS, MRI relaxivity, singlet oxygen assay."
+,,,,,,,,,,
+"LEGEND: All entries reference row numbers from Protocol Database (uploaded PDF, 61 entries) | CE = Conjugation Efficiency | EE = Encapsulation Efficiency | β-ME = β-mercaptoethanol | 2-ME = 2-mercaptoethanol | MWCO = molecular weight cut-off | TCEP = tris(2-carboxyethyl)phosphine | HBTU = O-benzotriazole-N,N,N′,N′-tetramethyl-uronium hexafluorophosphate | MES = 2-(N-morpholino)ethanesulfonic acid | LNP = lipid nanoparticle | IAASF = interfacial assembly on a solid film | PCT = post-conjugation technique",,,,,,,,,,

@@ -1,10 +1,17 @@
 from __future__ import annotations
 
+import json
+import os
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 from .orchestrator import PromptOrchestrationTrace
 from .retrieval import RetrievedEvidence
+
+try:
+    from openai import OpenAI
+except ImportError:  # pragma: no cover - optional dependency at runtime
+    OpenAI = None
 
 
 @dataclass
@@ -102,6 +109,85 @@ def _is_out_of_scope(query: str) -> bool:
     return not any(k in q for k in DOMAIN_KEYWORDS)
 
 
+def _generate_with_gpt4o(
+    user_query: str,
+    retrieved: List[RetrievedEvidence],
+    trace: PromptOrchestrationTrace,
+    score: float,
+) -> Optional[AgentResponse]:
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    if not api_key or OpenAI is None or not retrieved:
+        return None
+
+    model = os.getenv("OPENAI_MODEL", "gpt-4o").strip() or "gpt-4o"
+    top = retrieved[:5]
+    evidence_lines = []
+    citations = []
+    for idx, hit in enumerate(top, start=1):
+        rec = hit.record
+        citation = _citation_label(hit)
+        citations.append(citation)
+        evidence_lines.append(
+            f"[{idx}] Title: {rec.title}\n"
+            f"Year/Journal: {rec.year} / {rec.journal}\n"
+            f"Ligand: {rec.ligand_class}\n"
+            f"Nanoparticle: {rec.nanoparticle_system}\n"
+            f"Chemistry: {rec.conjugation_chemistry}\n"
+            f"Protocol conditions: {rec.protocol_conditions}\n"
+            f"Outcomes: {rec.outcomes}\n"
+            f"Limitations: {rec.limitations}\n"
+            f"Citation ID: {rec.doi_or_pmid or rec.source_id}\n"
+        )
+
+    system_prompt = (
+        "You are DCS-AI, a domain-constrained scientific assistant for ligand-functionalized nanoparticle protocols. "
+        "Only use the provided evidence. If evidence is weak, say so explicitly and provide conservative ranges. "
+        "Never invent citations. Return JSON only."
+    )
+    user_prompt = (
+        f"User query:\n{user_query}\n\n"
+        f"Evidence corpus:\n{chr(10).join(evidence_lines)}\n\n"
+        "Respond as JSON with keys:\n"
+        "interpreted_constraints (string),\n"
+        "protocol_options (array of strings),\n"
+        "evidence_mapping (array of strings),\n"
+        "risk_flags (array of strings),\n"
+        "additional_data_needed (array of strings).\n"
+        "Keep recommendations practical and include ranges where possible."
+    )
+
+    try:
+        client = OpenAI(api_key=api_key)
+        completion = client.chat.completions.create(
+            model=model,
+            temperature=0.2,
+            response_format={"type": "json_object"},
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+        )
+        content = completion.choices[0].message.content or "{}"
+        payload = json.loads(content)
+    except Exception:
+        return None
+
+    return AgentResponse(
+        status="ok",
+        interpreted_constraints=str(payload.get("interpreted_constraints", "")).strip()
+        or "Generated methodology from embedded evidence.",
+        protocol_options=[str(x) for x in payload.get("protocol_options", []) if str(x).strip()],
+        evidence_mapping=[str(x) for x in payload.get("evidence_mapping", []) if str(x).strip()],
+        risk_flags=[str(x) for x in payload.get("risk_flags", []) if str(x).strip()],
+        confidence=score,
+        additional_data_needed=[
+            str(x) for x in payload.get("additional_data_needed", []) if str(x).strip()
+        ],
+        citations=citations,
+        orchestration_trace=trace,
+    )
+
+
 def generate_response(user_query: str, retrieved: List[RetrievedEvidence], trace: PromptOrchestrationTrace) -> AgentResponse:
     score = _confidence(retrieved)
     citations = [_citation_label(item) for item in retrieved]
@@ -147,7 +233,7 @@ def generate_response(user_query: str, retrieved: List[RetrievedEvidence], trace
             orchestration_trace=trace,
         )
 
-    if len(retrieved) < 2 or score < 0.22:
+    if len(retrieved) < 1 or score < 0.1:
         return AgentResponse(
             status="insufficient_evidence",
             interpreted_constraints=(
@@ -165,6 +251,10 @@ def generate_response(user_query: str, retrieved: List[RetrievedEvidence], trace
             citations=citations,
             orchestration_trace=trace,
         )
+
+    llm_response = _generate_with_gpt4o(user_query, retrieved, trace, score)
+    if llm_response is not None:
+        return llm_response
 
     top = retrieved[:3]
     recommended_chemistry = chemistry or _recommended_chemistry(ligand, np_type)
