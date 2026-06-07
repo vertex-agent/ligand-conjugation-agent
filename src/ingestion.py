@@ -48,6 +48,9 @@ def validate_columns(df: pd.DataFrame) -> list[str]:
 def load_records(df: pd.DataFrame) -> List[EvidenceRecord]:
     records: list[EvidenceRecord] = []
     for _, row in df.iterrows():
+        evidence_type = str(row.get("evidence_type", "peer_reviewed_protocol")).strip()
+        if not evidence_type:
+            evidence_type = "peer_reviewed_protocol"
         records.append(
             EvidenceRecord(
                 source_id=str(row.get("source_id", "")).strip(),
@@ -65,6 +68,7 @@ def load_records(df: pd.DataFrame) -> List[EvidenceRecord]:
                 limitations=str(row.get("limitations", "")).strip(),
                 doi_or_pmid=str(row.get("doi_or_pmid", "")).strip() or None,
                 quality_score=_to_float_or_zero(row.get("quality_score", 0.0)),
+                evidence_type=evidence_type,
             )
         )
     return records

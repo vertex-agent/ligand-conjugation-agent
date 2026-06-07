@@ -2,6 +2,13 @@ from dataclasses import dataclass
 from typing import Optional
 
 
+EVIDENCE_TIER_LABELS = {
+    "peer_reviewed_protocol": "Peer-reviewed protocol",
+    "decision_matrix": "Chemistry decision matrix",
+    "user_upload": "User-uploaded literature",
+}
+
+
 @dataclass
 class EvidenceRecord:
     source_id: str
@@ -19,6 +26,11 @@ class EvidenceRecord:
     limitations: str
     doi_or_pmid: Optional[str] = None
     quality_score: float = 0.0
+    evidence_type: str = "peer_reviewed_protocol"
+
+    @property
+    def evidence_tier_label(self) -> str:
+        return EVIDENCE_TIER_LABELS.get(self.evidence_type, self.evidence_type)
 
     @property
     def retrieval_text(self) -> str:

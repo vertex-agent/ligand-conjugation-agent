@@ -68,6 +68,7 @@ def article_to_record(
         outcomes=_clip(text, 8_000),
         limitations="Uploaded document text may include methods/results outside the target context.",
         doi_or_pmid=None,
-        quality_score=0.0,
+        quality_score=0.45,
+        evidence_type="user_upload",
     )
 

@@ -7,6 +7,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from src.app_logic import load_dataframe_from_upload, run_agent
+from src.article_upload import article_to_record
 
 
 st.set_page_config(page_title="VERTEX", layout="wide")
@@ -39,6 +40,8 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []  # list[dict[str, str]] with keys: role, content
 if "query_input" not in st.session_state:
     st.session_state.query_input = ""
+if "uploaded_records" not in st.session_state:
+    st.session_state.uploaded_records = []
 
 st.title("VERTEX")
 st.markdown(
@@ -261,8 +264,32 @@ with st.sidebar:
 
     st.divider()
     st.subheader("Knowledge base")
-    st.caption("Embedded source (CSV-only)")
-    st.info("Answers are generated from the embedded protocol CSV knowledge base.")
+    st.caption("Embedded CSV sources plus optional PDF/TXT uploads for this session.")
+    st.info("Answers are generated from the embedded protocol CSV knowledge base and any uploaded papers.")
+
+    uploaded_articles = st.file_uploader(
+        "Add literature (PDF or TXT)",
+        type=["pdf", "txt"],
+        accept_multiple_files=True,
+        key="article_uploader",
+    )
+    if uploaded_articles:
+        new_records = []
+        for upload in uploaded_articles:
+            record = article_to_record(filename=upload.name, content=upload.getvalue())
+            if record is not None:
+                new_records.append(record)
+        if new_records:
+            existing_ids = {r.source_id for r in st.session_state.uploaded_records}
+            for record in new_records:
+                if record.source_id not in existing_ids:
+                    st.session_state.uploaded_records.append(record)
+                    existing_ids.add(record.source_id)
+            st.success(f"{len(st.session_state.uploaded_records)} uploaded paper(s) indexed for this session.")
+    if st.session_state.uploaded_records:
+        if st.button("Clear uploaded papers", use_container_width=True):
+            st.session_state.uploaded_records = []
+            st.rerun()
 
 st.caption("Try a preset question:")
 preset_col_1, preset_col_2, preset_col_3 = st.columns(3)
@@ -332,12 +359,22 @@ if run:
                 st.info("Schema detected: Native evidence schema.")
             else:
                 st.info(f"Loaded embedded knowledge base files: {df.attrs.get('kb_file_count', 1)}")
-            response, _ = run_agent(
+            response, stats = run_agent(
                 query.strip(),
                 df,
+                chat_history=st.session_state.chat_history,
+                extra_records=st.session_state.uploaded_records,
             )
+            assistant_content = response.interpreted_constraints
+            if response.clarifying_question:
+                assistant_content = response.clarifying_question
             st.session_state.chat_history.append(
-                {"role": "assistant", "content": response.interpreted_constraints}
+                {"role": "assistant", "content": assistant_content}
+            )
+
+            st.caption(
+                f"KB coverage: {stats['eligible_records']} eligible records "
+                f"({stats['retrieved_records']} retrieved for this query)."
             )
 
             st.subheader("Interpreted Constraints")
@@ -373,6 +410,25 @@ if run:
                 st.warning("No eligible citations found in provided dataset.")
 
             if response.status != "ok":
-                st.error("insufficient evidence in uploaded CSV")
+                if response.status == "needs_clarification":
+                    st.warning("VERTEX needs a bit more detail — reply in the text box to continue.")
+                elif response.status == "out_of_scope":
+                    st.warning("This question is outside VERTEX's conjugation domain.")
+                else:
+                    st.error("Insufficient evidence in the knowledge base for this combination.")
+
+            with st.expander("Agent trace (ReAct + chain-of-knowledge)"):
+                trace = response.orchestration_trace
+                st.write("**Persona**")
+                st.write(trace.persona_assignment)
+                st.write("**Chain-of-knowledge**")
+                for step in trace.chain_of_knowledge_steps:
+                    st.markdown(f"- {step}")
+                st.write("**Executed ReAct steps**")
+                for step in trace.react_steps:
+                    st.markdown(f"- {step}")
+                st.write("**Hallucination controls**")
+                for step in trace.hallucination_controls:
+                    st.markdown(f"- {step}")
         except Exception as exc:
             st.exception(exc)
